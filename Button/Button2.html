@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Button</title>
+    <style>
+        /* 가상요소로 버튼 효과 */
+        body {
+            height: 100vh; /*body가 스크린 화면 꽉 채우게 됨*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:#3c3e70;
+        }
+
+        .btn {
+            font-size: 25px;
+            padding: 15px 30px;
+            border: 3px solid gold; 
+            background-color: transparent;  /* 투명*/
+            color: gold;
+            text-transform: uppercase; /* 대문자 */
+            letter-spacing: 5px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;   /* 버튼의 넘친 가상요소 숨김*/
+            transition: all 0.33s;  /* 버튼 color */
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        .btn::before { /*button 태그 안에 가상요소(자식 요소) 만들어 줌*/
+            content: '';
+            position: absolute; /* 위치 부모 요소 기준으로 상대적으로 지정*/
+            height: 100%; /* 부모 크기의 100% */
+            width: 100%;
+            background-color: gold;
+            top: 100%; /* top으로 부터 100% 내려옴 */
+            left: 0;   /* 부모기준 좌표 0.100% 로 이동 */
+            transition: all 0.33s;  /* 가상요소 부드럽게 */
+            z-index: -1;    /* 요소가 곂치는 경우, z-index가 높을수록 앞쪽에 위치하게 되고, 낮을수록 뒷쪽에 위치*/
+        }                   /* z-index의 기본값은 auto이지만 0으로 입력된 것처럼 작동*/
+
+        .btn:hover::before {
+            transform: translateY(-100%); /* y축 세로 이동*/
+        }
+        .btn:hover {
+            color:#3c3e70;
+            cursor: pointer; /* 마우스 커서 모양*/  /* 마우스 hover시 color 바뀜*/
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">button</button>
+</body>
+</html>

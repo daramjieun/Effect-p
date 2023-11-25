@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform-origin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        a {
+            display: block;
+            position: relative;
+            margin: 200px 0 0 500px;
+            width: 300px;
+            height: 100px;
+            outline: 0;
+            border: 1px solid black;
+            font-size: 30px;
+            /* 줄 높이*/
+            line-height: 100px;
+            /* 텍스트 정렬 중앙*/
+            text-align: center;
+            color: #000;
+            /* a 텍스트 컬러 애니메이션 속도 설정, hover 이전(애니메이션 발생 전)에 작성*/
+            transition: 0.2s ease-in;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        /* 코드 줄이기 위해 공통 코드 함께 작성 */
+        a::after,
+        a::before {
+            /* 콘텐트 "" 작성해야 내용물 채워짐 */
+            content: "";
+            /* 상위 포지션 relative 기준으로  */
+            position: absolute;
+            top: 0;
+            /* 부모의 % 크기로 차지 */
+            width: 50%;
+            height: 100%;
+            /* a 요소 보다 아래로 */
+            z-index: -1;
+            background-color: dodgerblue;
+            /* 가로 사이즈 축소, 기존에는 효과 없으니 0으로 설정 */
+            transform: scaleX(0);
+            /* 애니메이션 hover 이전 단계에 작성, transform까지만 효과 먹히게*/
+            transition: transform 0.5s;
+        }
+
+        /* 안쪽에서 바깥쪽으로 빠져나감 */
+        a:after {
+            /* 오른쪽으로부터 위치 고정 */
+            right: 0;
+            /* 오른쪽에서 왼쪽으로 방향을 나아감 */
+            transform-origin: right;
+        }
+
+        a:before {
+            /* 왼쪽으로부터 위치 고정 */
+            left: 0;
+            /* 왼쪽에서 오른쪽으로 방향 나아감 */
+            transform-origin: left;
+        }
+
+        /* 안쪽에서 바깥으로 그려져 나가는 느낌 */
+        a:hover:after {
+            transform-origin: left;
+        }
+
+        a:hover:before {
+            transform-origin: right;
+        }
+
+        a:hover:after,
+        a:hover:before {
+            /* 기존에는 0이었다가 100%로  */
+            transform: scaleX(1);
+        }
+
+
+    </style>
+</head>
+<body>
+    <a href="#">Button</a>
+</body>
+</html>
